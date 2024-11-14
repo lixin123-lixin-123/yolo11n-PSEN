@@ -113,13 +113,7 @@ class BboxLoss(nn.Module):
         loss_iou = 0
         iou = bbox_iou(pred_bboxes[fg_mask], target_bboxes[fg_mask], xywh=False, CIoU=True)
         nwd = torch.exp(-torch.pow(Wasserstein(pred_bboxes[fg_mask].T, target_bboxes[fg_mask], xywh=False), 1 / 2) / 1.0)
-        # loss_iou = (((1.0 - iou) * weight).sum() / target_scores_sum ) * 0.5  +(((1.0 - nwd) * weight).sum() / target_scores_sum ) * 0.5
-        # 随着训练的进行调整权重
-        a =  (1 - self.current_epoch / self.max_epochs)
-        b = (self.current_epoch / self.max_epochs)
-        loss_iou1 = ((1.0 - iou).mean()) * a+ ((1.0 - nwd).mean()) * b
-        loss_iou = loss_iou + loss_iou1
-
+        loss_iou = (1.0 - iou) * 0.5  + (1.0 - nwd) * 0.5
 
 
 
