@@ -1,9 +1,0 @@
-path: ../datasets/aqm-coco # dataset root dir
-train: images/train/ # train images (relative to 'path') 39384 images
-val: images/val/ # val images (relative to 'path') 15062 images
-test: images/test/ # test images (optional) https://eval.ai/web/challenges/challenge-page/800/overview
-
-# Classes
-names:
-  0: hat
-  1: head(nohat)
