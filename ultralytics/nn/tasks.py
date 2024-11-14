@@ -83,9 +83,7 @@ from ultralytics.utils.torch_utils import (
     time_sync,
 )
 from .modules.ECA import ECA
-from .modules.iAFF import iAFF,AFF
 from .modules.SPPELAN import SPPELAN
-#from .modules.PConv import C3k2_PConv,PConv
 from ultralytics.nn.modules.PConv import C3k2_PConv, PConv
 
 
@@ -1041,10 +1039,6 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             args = [ch[f], *args]
         elif m in {ECA}:
             args = [ch[f], *args]
-        elif m in {iAFF, AFF}:
-            channels = [ch[x] for x in f]
-            c2 = channels[0]       # output of the iAFF module ( output channel is eighter of the channels)
-            args = [c2]
         elif m in {HGStem, HGBlock}:
             c1, cm, c2 = ch[f], args[0], args[1]
             args = [c1, cm, c2, *args[2:]]
