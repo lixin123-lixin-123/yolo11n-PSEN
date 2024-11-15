@@ -1,7 +1,9 @@
 # <div align="center">YOLO11-psen</div>
 
 We used the SHWD dataset and used Real-ESRGAN for data enhancement
+
 Datasets: https://github.com/njvisionpower/Safety-Helmet-Wearing-Dataset
+
 Real-ESRGAN： https://github.com/xinntao/Real-ESRGAN
 
 
@@ -22,7 +24,9 @@ Among them, `inputs` is the folder where the images to be processed are located.
 <details open>
 <summary>YOLO11-psen modification instructions</summary>
 
+
 The relevant configuration file is in [ultralytics/cfg/models/11-T/yolo11n_ECA_SPPELAN_C3K2PConv.yaml](https://github.com/lixin123-lixin-123/yolo11n-PSEN/blob/master/ultralytics/cfg/models/11-T/yolo11n_ECA_SPPELAN_C3K2PConv.yaml) 。
+
 
 Compared with the original `yolo11n.yaml`, we replaced the `C3K2` module with our modified `C3K2_PConv` module, which can be compared and analyzed in the 2nd, 4th, 6th, 8th, 13th, 16th, 19th, and 22nd layers of the yaml file; replaced the `SPPF` module with our `SPPELAN` module in the 9th layer of the model; replaced the `C2PSA` module with our `ECA` module in the 10th layer of the model, changed the number of times the layer is applied to 1, and changed the number of channels to adaptive inheritance. The number of `ECA` channels is usually automatically inherited from the output channel number of the previous layer, so it does not need to be explicitly specified. It can be automatically adapted through the previous layer's output, making the configuration file more flexible and versatile. For example, if the number of output channels of the previous layer of `ECA` is 1024, then `ECA` will use this number of channels. 
 
